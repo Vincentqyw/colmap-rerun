@@ -48,14 +48,15 @@ We provide sample reconstruction data to help you get started:
 
 1. Download the sample data from [Google Drive](https://drive.google.com/drive/folders/1pqhjHtgIESKB_QL8NSaFQdwysFZluLSs?usp=drive_link)
 2. Unzip the downloaded file to get the following directory structure:
-```
-sample_data/dense
-├── images/             # Input images
-├── sparse/             # COLMAP sparse reconstruction
-│   ├── cameras.bin     # Camera parameters
-│   ├── images.bin      # Image poses
-│   └── points3D.bin    # 3D point cloud
-└── stereo/depth_maps/  # Optional depth maps
+```text
+sample_data/dense/
+├── images/               # Input images (JPG/PNG format)
+├── sparse/               # COLMAP sparse reconstruction
+│   ├── cameras.bin       # Camera intrinsic parameters
+│   ├── images.bin        # Camera extrinsic parameters (poses)
+│   └── points3D.bin      # Reconstructed 3D point cloud
+└── stereo/
+    └── depth_maps/       # Depth maps (optional)
 ```
 
 3. Visualize the reconstruction:
