@@ -5,7 +5,7 @@
 <!-- [![Python Version](https://img.shields.io/pypi/pyversions/colmap-rerun)](https://pypi.org/project/colmap-rerun/) -->
 <!-- [![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) -->
 
-Visualize COLMAP sparse reconstruction output using Rerun's 3D visualization capabilities.
+Visualize COLMAP sparse / dense reconstruction output using Rerun's 3D visualization capabilities.
 
 https://github.com/user-attachments/assets/590b9902-6213-4545-985a-af478ab6d576
 
