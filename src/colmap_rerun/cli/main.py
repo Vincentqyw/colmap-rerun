@@ -6,6 +6,7 @@ from pathlib import Path
 from ..core.reconstruction import load_sparse_model
 from ..visualization.visualizer import visualize_reconstruction
 
+
 def main() -> None:
     """Main entry point for visualizing COLMAP sparse reconstruction."""
     parser = ArgumentParser(
@@ -23,11 +24,7 @@ def main() -> None:
         choices=["colmap_rusty_car", "colmap_fiat"],
         help="Which dataset to download",
     )
-    parser.add_argument(
-        "--resize", 
-        action="store", 
-        help="Target resolution to resize images"
-    )
+    parser.add_argument("--resize", action="store", help="Target resolution to resize images")
     args = parser.parse_args()
 
     if args.resize:
@@ -37,7 +34,7 @@ def main() -> None:
     recon = load_sparse_model(
         model_path=dataset_path / "sparse" / "0",
         images_root=dataset_path / "data",
-        depths_root=dataset_path / "sparse" / "stereo" / "depth_maps"
+        depths_root=dataset_path / "sparse" / "stereo" / "depth_maps",
     )
     visualize_reconstruction(
         recon.cameras,
@@ -46,8 +43,9 @@ def main() -> None:
         recon.images_root,
         recon.depth_root,
         filter_output=not args.unfiltered,
-        resize=args.resize
+        resize=args.resize,
     )
+
 
 if __name__ == "__main__":
     main()
