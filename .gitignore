@@ -1,0 +1,11 @@
+dataset/**
+*.pyc
+*.pyo
+*.pyd
+**__pycache__**
+*.egg-info/
+*.egg
+*.whl
+build
+.DS_Store
+.idea/
