@@ -54,17 +54,19 @@ def visualize_reconstruction(
     depth_root: Optional[Path] = None,
     filter_output: bool = True,
     resize: Optional[Tuple[int, int]] = None,
+    depth_range: Optional[Tuple[float, float]] = [0.0, 50.0],
 ) -> None:
     """Log COLMAP reconstruction to Rerun for visualization."""
     print("Building visualization by logging to Rerun")
 
-    rr.init("colmap_sparse_model", spawn=True)
+    rr.init("colmap_sparse_model1", spawn=True)
     blueprint = rrb.Blueprint(
         rrb.Horizontal(
             rrb.Spatial3DView(name="3D", origin="/"),
             rrb.Vertical(
                 rrb.Spatial2DView(name="Camera", origin="/camera/image"),
                 rrb.Spatial2DView(name="Depth", origin="/camera/depth"),
+                # rrb.Spatial2DView(name="Depth-photo", origin="/camera/depth-photo"),
                 rrb.TimeSeriesView(origin="/plot"),
             ),
         )
@@ -84,7 +86,11 @@ def visualize_reconstruction(
     # Log all 3D points (static, visible at all times)
     all_points = [point.xyz for point in points3D.values()]
     all_colors = [point.rgb for point in points3D.values()]
-    rr.log("points/all", rr.Points3D(all_points, colors=all_colors), static=True)
+    rr.log(
+        "points/all",
+        rr.Points3D(all_points, colors=all_colors),
+        static=True,
+    )
     # Iterate through images (video frames) logging data related to each frame.
     for image in tqdm(sorted(images.values(), key=lambda im: im.name)):
         image_file = images_root / image.name
@@ -155,11 +161,26 @@ def visualize_reconstruction(
         bgr = cv2.imread(str(image_file))
         if depth_root:
             depth_path = depth_root / f"{image.name}.geometric.bin"
+            depth_photo_path = depth_root / f"{image.name}.photometric.bin"
             if depth_path.exists():
                 depth = read_array(depth_path)
+                # depth_photo = read_array(depth_photo_path)
                 if resize:
                     depth = cv2.resize(depth, resize)
-                rr.log("camera/depth", rr.DepthImage(depth, colormap="Turbo"))
+                    depth_photo = cv2.resize(depth_photo, resize)
+
+                rr.log(
+                    "camera/depth",
+                    rr.Pinhole(
+                        resolution=[camera.width, camera.height],
+                        focal_length=camera.params[0:2],
+                        principal_point=camera.params[2:4],
+                    ),
+                )
+                rr.log(
+                    "camera/depth", rr.DepthImage(depth, colormap="Turbo", depth_range=depth_range)
+                )
+                # rr.log("camera/depth-photo", rr.DepthImage(depth_photo))
 
         if resize:
             bgr = cv2.resize(bgr, resize)
