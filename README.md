@@ -1,9 +1,9 @@
 # COLMAP Rerun Visualizer
 
-[![PyPI Version](https://img.shields.io/pypi/v/colmap-rerun)](https://pypi.org/project/colmap-rerun/)
+<!-- [![PyPI Version](https://img.shields.io/pypi/v/colmap-rerun)](https://pypi.org/project/colmap-rerun/) -->
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Python Version](https://img.shields.io/pypi/pyversions/colmap-rerun)](https://pypi.org/project/colmap-rerun/)
-[![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+<!-- [![Python Version](https://img.shields.io/pypi/pyversions/colmap-rerun)](https://pypi.org/project/colmap-rerun/) -->
+<!-- [![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) -->
 
 Visualize COLMAP sparse reconstruction output using Rerun's 3D visualization capabilities.
 
@@ -21,9 +21,10 @@ https://github.com/user-attachments/assets/590b9902-6213-4545-985a-af478ab6d576
 
 ### From PyPI
 
-```bash
+TODO
+<!-- ```bash
 pip install colmap-rerun
-```
+``` -->
 
 ### From Source
 
@@ -40,6 +41,52 @@ pip install -e ".[dev]"
 ```
 
 ## Quick Start
+
+### Example Dataset
+
+We provide sample reconstruction data to help you get started:
+
+1. Download the sample data from [Google Drive](https://drive.google.com/drive/folders/1pqhjHtgIESKB_QL8NSaFQdwysFZluLSs?usp=drive_link)
+2. Unzip the downloaded file to get the following directory structure:
+```
+sample_data/dense
+├── images/             # Input images
+├── sparse/             # COLMAP sparse reconstruction
+│   ├── cameras.bin     # Camera parameters
+│   ├── images.bin      # Image poses
+│   └── points3D.bin    # 3D point cloud
+└── stereo/depth_maps/  # Optional depth maps
+```
+
+3. Visualize the reconstruction:
+
+Using CLI:
+```bash
+visualize-colmap --dataset sample_data/dense
+```
+
+Or using Python API:
+
+```python
+from pathlib import Path
+from colmap_rerun import visualize_reconstruction
+from colmap_rerun.core.read_write_model import read_model
+
+# Setting data root
+data_root = Path("sample_data/dense")
+
+# Load reconstruction
+cameras, images, points3D = read_model(data_root / "sparse")
+
+# Visualize
+visualize_reconstruction(
+    cameras=cameras,
+    images=images,
+    points3D=points3D,
+    images_root=Path(data_root / "images"),
+    depth_root=Path(data_root / "stereo/depth_maps"),  # optional
+)
+```
 
 ### CLI Usage
 
@@ -69,9 +116,6 @@ visualize_reconstruction(
     points3D=points3D,
     images_root=Path("path/to/images"),
     depth_root=Path("path/to/depth"),  # optional
-    filter_output=True,  # filter noisy points
-    resize=(640, 480),  # optional
-    depth_range=(0.0, 50.0)  # optional
 )
 ```
 

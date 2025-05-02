@@ -32,9 +32,9 @@ def main() -> None:
 
     dataset_path = Path(args.dataset)
     recon = load_sparse_model(
-        model_path=dataset_path / "sparse" / "0",
-        images_root=dataset_path / "data",
-        depths_root=dataset_path / "sparse" / "stereo" / "depth_maps",
+        model_path=dataset_path / "sparse",
+        images_root=dataset_path / "images",
+        depths_root=dataset_path / "stereo" / "depth_maps",
     )
     visualize_reconstruction(
         recon.cameras,

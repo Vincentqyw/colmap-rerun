@@ -30,7 +30,7 @@ def main() -> None:
     if args.resize:
         args.resize = tuple(int(x) for x in args.resize.split("x"))
 
-    dataset_path = Path("/Users/realcat/datasets/3D/tussock_tiny_v2/dense")
+    dataset_path = Path("tussock_tiny_v2/dense")
     recon = load_sparse_model(
         model_path=dataset_path / "sparse",
         images_root=dataset_path / "images",
