@@ -2,6 +2,12 @@
 
 Visualize COLMAP sparse reconstruction output using Rerun.
 
+
+
+https://github.com/user-attachments/assets/590b9902-6213-4545-985a-af478ab6d576
+
+
+
 ## Installation
 
 Install from source:
