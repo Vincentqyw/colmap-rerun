@@ -29,12 +29,29 @@ jobs:
         name: dist
         path: dist/
 
+    - name: Upload to GitHub Release
+      if: github.event_name == 'release'
+      uses: softprops/action-gh-release@v2
+      with:
+        files: dist/*.whl
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Archive wheels
+      if: github.event_name == 'release'
+      uses: actions/upload-artifact@v4
+      with:
+        name: dist
+        path: dist/*.whl
+
+
   pypi-publish:
     name: Upload to PyPI
     needs: build
     runs-on: ubuntu-latest
     environment: pypi
     permissions:
+      contents: read
       id-token: write
     steps:
       - name: Download artifacts
