@@ -152,8 +152,9 @@ This project adheres to the Contributor Covenant [code of conduct](CODE_OF_CONDU
 
 ## Acknowledgements
 
-- This project uses [Rerun](https://github.com/rerun-io/rerun) for visualization
-- Inspired by COLMAP's 3D reconstruction capabilities
+- The [Rerun](https://github.com/rerun-io/rerun) team for their excellent visualization framework
+- Havily based on [structure_from_motion example](https://github.com/rerun-io/rerun/tree/main/examples/python/structure_from_motion)
+- The COLMAP team for their groundbreaking work in 3D reconstruction
 
 ## License
 
