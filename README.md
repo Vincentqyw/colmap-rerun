@@ -146,10 +146,6 @@ pytest
 black .
 ```
 
-## Code of Conduct
-
-This project adheres to the Contributor Covenant [code of conduct](CODE_OF_CONDUCT.md).
-
 ## Acknowledgements
 
 - The [Rerun](https://github.com/rerun-io/rerun) team for their excellent visualization framework
