@@ -1,6 +1,6 @@
 [project]
 name = "colmap-rerun"
-version = "1.0.0"
+version = "1.0.1"
 description = "Visualize COLMAP sparse reconstruction output using Rerun"
 readme = "README.md"
 authors = [
@@ -21,7 +21,7 @@ dependencies = [
 ]
 
 [project.scripts]
-visualize-colmap = "colmap_rerun.cli.main:main"
+viz-colmap = "colmap_rerun.cli.main:main"
 
 [build-system]
 requires = ["setuptools", "wheel"]

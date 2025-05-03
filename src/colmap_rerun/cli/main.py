@@ -13,16 +13,22 @@ def main() -> None:
         description="Visualize the output of COLMAP's sparse reconstruction on a video."
     )
     parser.add_argument(
-        "--unfiltered",
-        action="store_true",
-        help="If set, we don't filter away any noisy data.",
+        "--sparse_model",
+        help="Spare reconstruction dataset path, e.g., /path/to/dataset/sparse",
+        type=Path,
+        required=False,
     )
     parser.add_argument(
-        "--dataset",
-        action="store",
-        default="colmap_rusty_car",
-        choices=["colmap_rusty_car", "colmap_fiat"],
-        help="Which dataset to download",
+        "--images_path",
+        help="Path to the folder containing images, e.g., /path/to/dataset/images",
+        type=Path,
+        required=False,
+    )
+    parser.add_argument(
+        "--dense_model",
+        help="Dense reconstruction dataset path, e.g., /path/to/dataset/dense",
+        type=Path,
+        required=False,
     )
     parser.add_argument(
         "--resize",
@@ -30,15 +36,37 @@ def main() -> None:
         type=int,
         help="Target resolution to resize images as width height, e.g., 640 480",
     )
+    parser.add_argument(
+        "--unfiltered",
+        action="store_true",
+        help="If set, we don't filter away any noisy data.",
+    )
     args = parser.parse_args()
     if args.resize:
         args.resize = tuple(args.resize)
 
-    dataset_path = Path(args.dataset)
+    # If a dense model is provided, we use the sparse model from the dense model path.
+    # This is useful for visualizing the sparse model from a dense reconstruction.
+    # The spare model is expected to be in the format /path/to/dataset/dense/sparse.
+    # The images path is expected to be in the format /path/to/dataset/dense/images.
+    # The depth maps path is expected to be in the format /path/to/dataset/dense/stereo/depth_maps.
+    if args.dense_model is not None:
+        args.sparse_model = args.dense_model / "sparse"
+        args.images_path = args.dense_model / "images"
+    else:
+        if args.sparse_model is None:
+            raise ValueError("Sparse model path is required.")
+        if args.images_path is None:
+            raise ValueError("Images path is required.")
+        if not args.sparse_model.exists():
+            raise ValueError(f"Sparse model path {args.sparse_model} does not exist.")
+        if not args.images_path.exists():
+            raise ValueError(f"Images path {args.images_path} does not exist.")
+
     recon = load_sparse_model(
-        model_path=dataset_path / "sparse",
-        images_root=dataset_path / "images",
-        depths_root=dataset_path / "stereo" / "depth_maps",
+        model_path=args.sparse_model,
+        images_root=args.images_path,
+        depths_root=args.dense_model / "stereo" / "depth_maps",
     )
     visualize_reconstruction(
         recon.cameras,

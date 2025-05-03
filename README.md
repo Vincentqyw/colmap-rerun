@@ -61,10 +61,43 @@ sample_data/dense/
 
 3. Visualize the reconstruction:
 
-Using CLI:
+## Using CLI
+
+The CLI provides several options for visualizing COLMAP reconstructions:
+
+### Basic Usage
+
+Visualize dense reconstruction (automatically finds sparse model and images):
 ```bash
-visualize-colmap --dataset sample_data/dense
+viz-colmap --dense_model sample_data/dense
 ```
+
+### Advanced Options
+
+Visualize sparse reconstruction with custom paths:
+```bash
+viz-colmap --sparse_model sample_data/sparse --images_path sample_data/images
+```
+
+Resize images for better performance:
+```bash
+viz-colmap --dense_model sample_data/dense --resize 640 480
+```
+
+Show unfiltered point cloud (includes noisy data):
+```bash
+viz-colmap --dense_model sample_data/dense --unfiltered
+```
+
+### CLI Arguments
+
+| Argument       | Description | Required |
+|----------------|-------------|----------|
+| `--dense_model` | Path to dense reconstruction folder (contains sparse/ and images/) | No |
+| `--sparse_model` | Path to sparse reconstruction folder (contains cameras.bin, images.bin, points3D.bin) | Required if no dense_model |
+| `--images_path` | Path to folder containing input images | Required if no dense_model |
+| `--resize W H` | Resize images to width W and height H for better performance | No |
+| `--unfiltered` | Show unfiltered point cloud (includes noisy data) | No |
 
 Or using Python API:
 
