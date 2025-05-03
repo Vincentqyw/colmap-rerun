@@ -1,6 +1,6 @@
 # COLMAP Rerun Visualizer
 
-<!-- [![PyPI Version](https://img.shields.io/pypi/v/colmap-rerun)](https://pypi.org/project/colmap-rerun/) -->
+[![PyPI Version](https://img.shields.io/pypi/v/colmap-rerun)](https://pypi.org/project/colmap-rerun/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 <!-- [![Python Version](https://img.shields.io/pypi/pyversions/colmap-rerun)](https://pypi.org/project/colmap-rerun/) -->
 <!-- [![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) -->
@@ -21,10 +21,9 @@ https://github.com/user-attachments/assets/590b9902-6213-4545-985a-af478ab6d576
 
 ### From PyPI
 
-TODO
-<!-- ```bash
+```bash
 pip install colmap-rerun
-``` -->
+```
 
 ### From Source
 
@@ -91,8 +90,8 @@ viz-colmap --dense_model sample_data/dense --unfiltered
 
 ### CLI Arguments
 
-| Argument       | Description | Required |
-|----------------|-------------|----------|
+| Argument            | Description | Required |
+|-----------------------|-------------|----------|
 | `--dense_model` | Path to dense reconstruction folder (contains sparse/ and images/) | No |
 | `--sparse_model` | Path to sparse reconstruction folder (contains cameras.bin, images.bin, points3D.bin) | Required if no dense_model |
 | `--images_path` | Path to folder containing input images | Required if no dense_model |
