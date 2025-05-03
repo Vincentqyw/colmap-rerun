@@ -1,6 +1,6 @@
 [project]
-name = "colmap_rerun"
-version = "0.1.0"
+name = "colmap-rerun"
+version = "1.0.0"
 description = "Visualize COLMAP sparse reconstruction output using Rerun"
 readme = "README.md"
 authors = [
