@@ -51,7 +51,7 @@ def visualize_reconstruction(
     images: Dict[int, Image],
     points3D: Dict[int, Point3D],
     images_root: Path,
-    depth_root: Optional[Path] = None,
+    depths_root: Optional[Path] = None,
     filter_output: bool = True,
     resize: Optional[Tuple[int, int]] = None,
     depth_range: Optional[Tuple[float, float]] = [0.0, 50.0],
@@ -159,15 +159,15 @@ def visualize_reconstruction(
         )
 
         bgr = cv2.imread(str(image_file))
-        if depth_root:
-            depth_path = depth_root / f"{image.name}.geometric.bin"
-            depth_photo_path = depth_root / f"{image.name}.photometric.bin"
+        if depths_root:
+            depth_path = depths_root / f"{image.name}.geometric.bin"
+            depth_photo_path = depths_root / f"{image.name}.photometric.bin"
             if depth_path.exists():
                 depth = read_array(depth_path)
                 # depth_photo = read_array(depth_photo_path)
                 if resize:
                     depth = cv2.resize(depth, resize)
-                    depth_photo = cv2.resize(depth_photo, resize)
+                    # depth_photo = cv2.resize(depth_photo, resize)
 
                 rr.log(
                     "camera/depth",

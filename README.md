@@ -85,38 +85,7 @@ visualize_reconstruction(
     images=images,
     points3D=points3D,
     images_root=Path(data_root / "images"),
-    depth_root=Path(data_root / "stereo/depth_maps"),  # optional
-)
-```
-
-### CLI Usage
-
-```bash
-visualize-colmap [--unfiltered] [--dataset DATASET] [--resize WxH]
-```
-
-#### Options
-- `--unfiltered`: Disable filtering of noisy 3D points
-- `--dataset`: Dataset to visualize (colmap_rusty_car or colmap_fiat)
-- `--resize`: Target resolution (e.g. 640x480)
-
-### Python API
-
-```python
-from pathlib import Path
-from colmap_rerun import visualize_reconstruction
-from colmap_rerun.core.read_write_model import read_model
-
-# Load COLMAP reconstruction
-cameras, images, points3D = read_model("path/to/colmap/reconstruction")
-
-# Visualize
-visualize_reconstruction(
-    cameras=cameras,
-    images=images,
-    points3D=points3D,
-    images_root=Path("path/to/images"),
-    depth_root=Path("path/to/depth"),  # optional
+    depths_root=Path(data_root / "stereo/depth_maps"),  # optional
 )
 ```
 

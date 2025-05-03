@@ -13,17 +13,19 @@ def main() -> None:
         description="Visualize the output of COLMAP's sparse reconstruction on a video."
     )
     parser.add_argument(
-        "--unfiltered",
-        action="store_true",
-        help="If set, we don't filter away any noisy data.",
-    )
-    parser.add_argument(
         "--dataset",
         action="store",
         default="colmap_rusty_car",
         choices=["colmap_rusty_car", "colmap_fiat"],
         help="Which dataset to download",
     )
+
+    parser.add_argument(
+        "--unfiltered",
+        action="store_true",
+        help="If set, we don't filter away any noisy data.",
+    )
+
     parser.add_argument("--resize", action="store", help="Target resolution to resize images")
     args = parser.parse_args()
 
@@ -41,7 +43,7 @@ def main() -> None:
         recon.images,
         recon.points3D,
         recon.images_root,
-        recon.depth_root,
+        recon.depths_root,
         filter_output=not args.unfiltered,
         resize=args.resize,
     )

@@ -41,7 +41,7 @@ def main() -> None:
         recon.images,
         recon.points3D,
         recon.images_root,
-        recon.depth_root,
+        recon.depths_root,
         filter_output=not args.unfiltered,
         resize=args.resize,
     )

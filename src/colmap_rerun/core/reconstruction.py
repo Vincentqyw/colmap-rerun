@@ -15,7 +15,7 @@ class ReconstructionData:
     images: Dict[int, Image]
     points3D: Dict[int, Point3D]
     images_root: Optional[Path] = None
-    depth_root: Optional[Path] = None
+    depths_root: Optional[Path] = None
 
 
 def load_sparse_model(
@@ -28,5 +28,5 @@ def load_sparse_model(
         images=images,
         points3D=points3D,
         images_root=images_root,
-        depth_root=depths_root,
+        depths_root=depths_root,
     )
