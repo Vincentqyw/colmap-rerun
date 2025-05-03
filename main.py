@@ -26,11 +26,16 @@ def main() -> None:
         help="If set, we don't filter away any noisy data.",
     )
 
-    parser.add_argument("--resize", action="store", help="Target resolution to resize images")
+    parser.add_argument(
+        "--resize",
+        nargs=2,
+        type=int,
+        help="Target resolution to resize images as width height, e.g., 640 480",
+    )
     args = parser.parse_args()
 
     if args.resize:
-        args.resize = tuple(int(x) for x in args.resize.split("x"))
+        args.resize = tuple(args.resize)
 
     dataset_path = Path("tussock_tiny_v2/dense")
     recon = load_sparse_model(
