@@ -15,8 +15,6 @@ def main() -> None:
     parser.add_argument(
         "--dataset",
         action="store",
-        default="colmap_rusty_car",
-        choices=["colmap_rusty_car", "colmap_fiat"],
         help="Which dataset to download",
     )
 
@@ -38,6 +36,8 @@ def main() -> None:
         args.resize = tuple(args.resize)
 
     dataset_path = Path("tussock_tiny_v2/dense")
+    if args.dataset:
+        dataset_path = Path(args.dataset)
     recon = load_sparse_model(
         model_path=dataset_path / "sparse",
         images_root=dataset_path / "images",

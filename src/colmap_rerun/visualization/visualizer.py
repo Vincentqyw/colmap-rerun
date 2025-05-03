@@ -1,5 +1,7 @@
 """Visualization of COLMAP reconstructions using Rerun."""
 
+from __future__ import annotations
+
 import os
 import re
 from pathlib import Path
@@ -103,7 +105,7 @@ def visualize_reconstruction(
         assert idx_match is not None
         frame_idx = int(idx_match.group(0))
 
-        quat_xyzw = image.qvec[[1, 2, 3, 0]]  # COLMAP uses wxyz quaternions
+        quat_xyzw = image.qvec[[1, 2, 3, 0]].astype(np.float32)  # COLMAP uses wxyz quaternions
         camera = cameras[image.camera_id]
         camera = convert_simple_radial_to_pinhole(camera)
         if resize:
@@ -141,7 +143,7 @@ def visualize_reconstruction(
             "camera",
             rr.Transform3D(
                 translation=image.tvec,
-                rotation=rr.Quaternion(xyzw=quat_xyzw),
+                quaternion=quat_xyzw,
                 relation=rr.TransformRelation.ChildFromParent,
             ),
         )
