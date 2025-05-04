@@ -2,8 +2,8 @@
 
 [![PyPI Version](https://img.shields.io/pypi/v/colmap-rerun)](https://pypi.org/project/colmap-rerun/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Python Version](https://img.shields.io/pypi/pyversions/colmap-rerun)](https://pypi.org/project/colmap-rerun/)
-[![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+<!-- [![Python Version](https://img.shields.io/pypi/pyversions/colmap-rerun)](https://pypi.org/project/colmap-rerun/)
+[![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) -->
 
 Interactive 3D visualization of COLMAP sparse/dense reconstruction output using Rerun's visualization capabilities.
 
@@ -12,7 +12,6 @@ https://github.com/user-attachments/assets/590b9902-6213-4545-985a-af478ab6d576
 ## Features
 
 - Interactive 3D visualization of COLMAP reconstructions
-- Support for both filtered and unfiltered point clouds
 - Dataset-specific visualization presets
 - Resolution scaling for performance optimization
 - Python API and CLI interface
@@ -61,6 +60,18 @@ sample_data/dense/
 
 ## Usage
 
+### Demo Script (Quick Start)
+
+Basic usage:
+```bash
+python demo.py --dense_model sample_data/dense
+```
+
+Advanced options:
+```bash
+python demo.py --dense_model sample_data/dense --resize 640 480 --unfiltered
+```
+
 ### Python API
 
 ```python
@@ -99,18 +110,6 @@ viz-colmap --dense_model sample_data/dense
 | `--unfiltered`      | Show unfiltered point cloud (with noise)     | No       |
 
 *Required if not using dense_model
-
-### Demo Script
-
-Basic usage:
-```bash
-python demo.py --dense_model sample_data/dense
-```
-
-Advanced options:
-```bash
-python demo.py --dense_model sample_data/dense --resize 640 480 --unfiltered
-```
 
 ## Contributing
 
