@@ -2,10 +2,10 @@
 
 [![PyPI Version](https://img.shields.io/pypi/v/colmap-rerun)](https://pypi.org/project/colmap-rerun/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-<!-- [![Python Version](https://img.shields.io/pypi/pyversions/colmap-rerun)](https://pypi.org/project/colmap-rerun/) -->
-<!-- [![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) -->
+[![Python Version](https://img.shields.io/pypi/pyversions/colmap-rerun)](https://pypi.org/project/colmap-rerun/)
+[![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-Visualize COLMAP sparse / dense reconstruction output using Rerun's 3D visualization capabilities.
+Interactive 3D visualization of COLMAP sparse/dense reconstruction output using Rerun's visualization capabilities.
 
 https://github.com/user-attachments/assets/590b9902-6213-4545-985a-af478ab6d576
 
@@ -39,79 +39,38 @@ For development:
 pip install -e ".[dev]"
 ```
 
-## Quick Start
+## Getting Started
 
-### Example Dataset
+### Download Example Dataset
 
-We provide sample reconstruction data to help you get started:
+Download sample reconstruction data:
 
-1. Download the sample data from [Google Drive](https://drive.google.com/drive/folders/1pqhjHtgIESKB_QL8NSaFQdwysFZluLSs?usp=drive_link)
-2. Unzip the downloaded file to get the following directory structure:
+1. Get sample data from [Google Drive](https://drive.google.com/drive/folders/1pqhjHtgIESKB_QL8NSaFQdwysFZluLSs?usp=drive_link)
+2. Unzip to get directory structure:
+
 ```text
 sample_data/dense/
-├── images/               # Input images (JPG/PNG format)
+├── images/               # Input images
 ├── sparse/               # COLMAP sparse reconstruction
-│   ├── cameras.bin       # Camera intrinsic parameters
-│   ├── images.bin        # Camera extrinsic parameters (poses)
-│   └── points3D.bin      # Reconstructed 3D point cloud
+│   ├── cameras.bin       # Camera intrinsics
+│   ├── images.bin        # Camera poses
+│   └── points3D.bin      # 3D point cloud
 └── stereo/
     └── depth_maps/       # Depth maps (optional)
 ```
 
-3. Visualize the reconstruction:
+## Usage
 
-## Using CLI
-
-The CLI provides several options for visualizing COLMAP reconstructions:
-
-### Basic Usage
-
-Visualize dense reconstruction (automatically finds sparse model and images):
-```bash
-viz-colmap --dense_model sample_data/dense
-```
-
-### Advanced Options
-
-Visualize sparse reconstruction with custom paths:
-```bash
-viz-colmap --sparse_model sample_data/sparse --images_path sample_data/images
-```
-
-Resize images for better performance:
-```bash
-viz-colmap --dense_model sample_data/dense --resize 640 480
-```
-
-Show unfiltered point cloud (includes noisy data):
-```bash
-viz-colmap --dense_model sample_data/dense --unfiltered
-```
-
-### CLI Arguments
-
-| Argument            | Description | Required |
-|-----------------------|-------------|----------|
-| `--dense_model` | Path to dense reconstruction folder (contains sparse/ and images/) | No |
-| `--sparse_model` | Path to sparse reconstruction folder (contains cameras.bin, images.bin, points3D.bin) | Required if no dense_model |
-| `--images_path` | Path to folder containing input images | Required if no dense_model |
-| `--resize W H` | Resize images to width W and height H for better performance | No |
-| `--unfiltered` | Show unfiltered point cloud (includes noisy data) | No |
-
-Or using Python API:
+### Python API
 
 ```python
 from pathlib import Path
 from colmap_rerun import visualize_reconstruction
 from colmap_rerun.core.read_write_model import read_model
 
-# Setting data root
 data_root = Path("sample_data/dense")
-
-# Load reconstruction
 cameras, images, points3D = read_model(data_root / "sparse")
 
-# Visualize
 visualize_reconstruction(
     cameras=cameras,
     images=images,
@@ -121,36 +80,47 @@ visualize_reconstruction(
 )
 ```
 
-## Documentation
+### Command Line Interface
 
-Full documentation is available at [docs/](docs/).
+After installing with `pip install -e .`:
+
+```bash
+viz-colmap --dense_model sample_data/dense
+```
+
+#### CLI Options
+
+| Argument            | Description                                  | Required |
+|---------------------|----------------------------------------------|----------|
+| `--dense_model`     | Path to dense reconstruction folder          | No       |
+| `--sparse_model`    | Path to sparse reconstruction folder         | Yes*     |
+| `--images_path`     | Path to input images folder                  | Yes*     |
+| `--resize W H`      | Resize images to width W and height H        | No       |
+| `--unfiltered`      | Show unfiltered point cloud (with noise)     | No       |
+
+*Required if not using dense_model
+
+### Demo Script
+
+Basic usage:
+```bash
+python demo.py --dense_model sample_data/dense
+```
+
+Advanced options:
+```bash
+python demo.py --dense_model sample_data/dense --resize 640 480 --unfiltered
+```
 
 ## Contributing
 
 We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-### Development Setup
-
-1. Install development dependencies:
-```bash
-pip install -e ".[dev]"
-```
-
-2. Run tests:
-```bash
-pytest
-```
-
-3. Format code:
-```bash
-black .
-```
-
 ## Acknowledgements
 
-- The [Rerun](https://github.com/rerun-io/rerun) team for their excellent visualization framework
-- Havily based on [structure_from_motion example](https://github.com/rerun-io/rerun/tree/main/examples/python/structure_from_motion)
-- The COLMAP team for their groundbreaking work in 3D reconstruction
+- [Rerun](https://github.com/rerun-io/rerun) team for visualization framework
+- Based on [structure_from_motion example](https://github.com/rerun-io/rerun/tree/main/examples/python/structure_from_motion)
+- COLMAP team for 3D reconstruction work
 
 ## License
 
