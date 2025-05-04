@@ -62,6 +62,8 @@ sample_data/dense/
 
 ### Demo Script (Quick Start)
 
+The demo script accepts the same arguments as the CLI interface (see below for full options):
+
 Basic usage:
 ```bash
 python demo.py --dense_model sample_data/dense
