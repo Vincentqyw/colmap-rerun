@@ -61,7 +61,7 @@ def visualize_reconstruction(
     """Log COLMAP reconstruction to Rerun for visualization."""
     print("Building visualization by logging to Rerun")
 
-    rr.init("colmap_sparse_model1", spawn=True)
+    rr.init("colmap_sparse_model", spawn=True)
     blueprint = rrb.Blueprint(
         rrb.Horizontal(
             rrb.Spatial3DView(name="3D", origin="/"),
