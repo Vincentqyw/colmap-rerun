@@ -6,12 +6,12 @@ from pathlib import Path
 from ..core.reconstruction import load_sparse_model
 from ..visualization.visualizer import visualize_reconstruction
 
+import rerun as rr
+
 
 def main() -> None:
     """Main entry point for visualizing COLMAP sparse reconstruction."""
-    parser = ArgumentParser(
-        description="Visualize the output of COLMAP's sparse reconstruction on a video."
-    )
+    parser = ArgumentParser(description="Visualize the output of COLMAP's sparse reconstruction on a video.")
     parser.add_argument(
         "--sparse_model",
         help="Spare reconstruction dataset path, e.g., /path/to/dataset/sparse",
@@ -41,6 +41,7 @@ def main() -> None:
         action="store_true",
         help="If set, we don't filter away any noisy data.",
     )
+    rr.script_add_args(parser)
     args = parser.parse_args()
     if args.resize:
         args.resize = tuple(args.resize)
@@ -77,6 +78,7 @@ def main() -> None:
         filter_output=not args.unfiltered,
         resize=args.resize,
     )
+    rr.script_teardown(args)
 
 
 if __name__ == "__main__":
