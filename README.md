@@ -3,6 +3,8 @@
 [![PyPI Version](https://img.shields.io/pypi/v/colmap-rerun)](https://pypi.org/project/colmap-rerun/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![PyPI Downloads](https://static.pepy.tech/badge/colmap-rerun)](https://pepy.tech/projects/colmap-rerun)
+[![DeepWiki](https://img.shields.io/badge/DeepWiki-colmap_rerun-blue.svg)](https://deepwiki.com/Vincentqyw/colmap-rerun)
+
 <!-- [![Python Version](https://img.shields.io/pypi/pyversions/colmap-rerun)](https://pypi.org/project/colmap-rerun/)
 [![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) -->
 
